@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+    <!--配置注解驱动-->
+    <mvc:annotation-driven/>
+
+    <!--配置包扫描-->
+    <context:component-scan base-package="com.itany.zshop.backend.controller"/>
+
+    <!--指定视图解析器：如何把handler方法返回给视图,
+    /WEB-INF/views/这里前面和后面的斜杠都不能丢，我犯过这个错误，坑死了-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--想直接看到登录界面,在springmvc中使用mvc:view-controller标签直接将访问url和视图进行映射，
+    而无需要通过控制器。-->
+    <mvc:view-controller path="/showLogin" view-name="login"/>
+
+    <!--login.jsp页面中的样式都用不来哦，配置一下
+    /WEB-INF/css/，这里前面和后面的斜杠都不能丢-->
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
+    <mvc:resources mapping="/images/**" location="/WEB-INF/images/"/>
+    <mvc:resources mapping="/fonts/**" location="/WEB-INF/fonts/"/>
+    <mvc:resources mapping="/iconfont/**" location="/WEB-INF/iconfont/"/>
+
+
+</beans>
